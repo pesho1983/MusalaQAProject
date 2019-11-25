@@ -62,6 +62,16 @@ public class LoginFormTests {
 
     @Test
     public void invalidLoginPassword() throws InterruptedException {
+        initLoginAndDriver("tomsmith", "SuperSecretPassword!123", Browsers.FireFox);
+        sleep(1000);
+        WebElement loginFailMessage = driver.findElement(By.id("flash"));
+        Assert.assertTrue(
+                loginFailMessage.getText().contains("Your password is invalid!"));
+
+    }
+
+    @Test
+    public void invalidLoginUsername() throws InterruptedException {
         initLoginAndDriver("tomsmith123", "SuperSecretPassword!", Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
@@ -70,8 +80,13 @@ public class LoginFormTests {
 
     }
 
-    public void validationMessageEmail() {
-        //WebElement linkMyProfile = driver.findElement(By.xpath("//header[@id='header']/div[1]/div/nav[1]/a[@href='https://www.therecordscorner.com/nachalo']"))
+    @Test
+    public void validationMessageEmail() throws InterruptedException {
+        initLoginAndDriver("", "", Browsers.FireFox);
+        sleep(1000);
+        WebElement loginFailMessage = driver.findElement(By.id("flash"));
+        Assert.assertTrue(
+                loginFailMessage.getText().contains("Your username is invalid!"));
     }
 
     @After
