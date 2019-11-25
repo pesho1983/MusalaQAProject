@@ -1,7 +1,6 @@
-# InteliJ
+# IntelliJ
 .idea
-target
-
+ 
 # Maven
 target/
 pom.xml.tag
