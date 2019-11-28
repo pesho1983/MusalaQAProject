@@ -1,13 +1,15 @@
+package tests;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.RegistrationPage;
 
-
 import java.util.concurrent.TimeUnit;
+
 
 public class RegistrationTests {
     private WebDriver driver;
@@ -15,7 +17,7 @@ public class RegistrationTests {
 
     @Before
     public void setup() {
-        //use FF Driver
+        //use Chrome Driver
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();  //fullscreen

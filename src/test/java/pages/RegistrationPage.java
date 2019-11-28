@@ -1,16 +1,17 @@
 package pages;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import static utils.Utils.BASE_URL;
+
 
 public class RegistrationPage {
 
     private WebDriver driver = null;
     //Page URL
-    private static final String PAGE_URL = "https://www.therecordscorner.com/ragistracia";
+    private static final String PAGE_URL = BASE_URL + "/ragistracia";
 
     @FindBy(id = "profile_email")
     private WebElement email;
@@ -36,7 +37,6 @@ public class RegistrationPage {
     }
 
     public void fillLegalRegistrationForm() throws InterruptedException {
-
 
         legalPerson.click();
         email.sendKeys("abv@abv.bg");
