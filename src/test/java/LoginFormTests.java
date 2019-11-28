@@ -13,12 +13,8 @@ public class LoginFormTests {
     private WebDriver driver = null;
     private String loginURL = "http://the-internet.herokuapp.com/login";
 
-    private enum Browsers {
-        Chrome,
-        FireFox
-    }
 
-    private void initLoginAndDriver(String username, String password, Browsers browser) {
+    private void initLoginAndDriver(String username, String password, Config.Browsers browser) {
 
         switch (browser) {
             case Chrome:
@@ -49,7 +45,7 @@ public class LoginFormTests {
 
     @Test
     public void successLogin() throws InterruptedException {
-        initLoginAndDriver("tomsmith", "SuperSecretPassword!", Browsers.Chrome);
+        initLoginAndDriver(Config.USERNAME, Config.PASSWORD, Config.Browsers.Chrome);
 
         //verify login
         sleep(1000);
@@ -62,7 +58,7 @@ public class LoginFormTests {
 
     @Test
     public void invalidLoginPassword() throws InterruptedException {
-        initLoginAndDriver("tomsmith", "SuperSecretPassword!123", Browsers.FireFox);
+        initLoginAndDriver(Config.USERNAME, "SuperSecretPassword!123", Config.Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
         Assert.assertTrue(
@@ -72,7 +68,7 @@ public class LoginFormTests {
 
     @Test
     public void invalidLoginUsername() throws InterruptedException {
-        initLoginAndDriver("tomsmith123", "SuperSecretPassword!", Browsers.FireFox);
+        initLoginAndDriver("tomsmith123", Config.PASSWORD, Config.Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
         Assert.assertTrue(
@@ -82,12 +78,25 @@ public class LoginFormTests {
 
     @Test
     public void validationMessageEmail() throws InterruptedException {
-        initLoginAndDriver("", "", Browsers.FireFox);
+        initLoginAndDriver("", "", Config.Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
         Assert.assertTrue(
                 loginFailMessage.getText().contains("Your username is invalid!"));
     }
+
+    @Test
+    public void validationLogoutMessage() throws InterruptedException {
+        initLoginAndDriver(Config.USERNAME, Config.PASSWORD, Config.Browsers.FireFox);
+        sleep(1000);
+        WebElement logout = driver.findElement(By.xpath("//*[@id=\"content\"]/div/a"));
+        logout.click();
+        sleep(1000);
+        WebElement loginFailMessage = driver.findElement(By.id("flash"));
+        Assert.assertTrue(
+                loginFailMessage.getText().contains("You logged out of the secure area!"));
+    }
+
 
     @After
     public void cleanUp() {
