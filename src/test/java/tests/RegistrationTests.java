@@ -20,8 +20,6 @@ public class RegistrationTests {
         //use Chrome Driver
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
-
-
         driver.manage().window().maximize();  //fullscreen
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -42,12 +40,13 @@ public class RegistrationTests {
         RegistrationPage registration = new RegistrationPage(driver);
         registration.fillLegalRegistrationForm();
         registration.register();
+        registration.isRegisterSuccess();
     }
 
-//    @After
-//    public void cleanUp() {
-//        driver.quit(); //close browser
-//    }
+    @After
+    public void cleanUp() {
+        driver.quit(); //close browser
+    }
 
 
 }

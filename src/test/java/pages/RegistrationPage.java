@@ -14,12 +14,14 @@ public class RegistrationPage {
     private WebDriver driver = null;
     //Page URL
     private static final String PAGE_URL = BASE_URL + "/ragistracia";
-
+    //credentials
     @FindBy(id = "profile_email")
     private WebElement email;
     @FindBy(id = "profile_password")
     private WebElement password;
-
+    //IndividualPerson
+    @FindBy(id = "profile_billing_type_individual")
+    private WebElement individualPerson;
     @FindBy(id = "profile_billing_person_name")
     private WebElement name;
     @FindBy(id = "profile_billing_address")
@@ -27,16 +29,24 @@ public class RegistrationPage {
     @FindBy(id = "profile_billing_phone")
     private WebElement phone;
 
-    @FindBy(xpath = "//*[@id=\"user_account_fields\"]/div[10]/div[2]/div/div/label/b")
+    //LegalPerson
+    @FindBy(xpath = "//*[@id=\"user_account_fields\"]/div[2]/div[2]/div/label")
+    private WebElement legalPerson;
+    @FindBy(id = "profile_billing_org_name")
+    private WebElement nameOrganization;
+    @FindBy(id = "profile_billing_org_vat")
+    private WebElement eik;
+    @FindBy(id = "profile_billing_name")
+    private WebElement nameORG;
+
+    //*[@id=\"user_account_fields\"]/div[10]/div[2]/div/div/label/b
+    @FindBy(xpath = "//input[@id='confirm_terms_desktop']/../label/b")
     private WebElement agreementsCheckButton;
 
     @FindBy(xpath = "  //*[@id=\"user_account_fields\"]/div[10]/div[1]/div/div/label")
     private WebElement receiveMessagesCheckButton;
 
-    @FindBy(id = "profile_billing_type_individual")
-    private WebElement individualPerson;
-    @FindBy(id = "profile_billing_type_company")
-    private WebElement legalPerson;
+    //Final
     @FindBy(xpath = "//*[@id=\"user_account_fields\"]/div[10]/button")
     private WebElement registerButton;
 
@@ -64,19 +74,31 @@ public class RegistrationPage {
         if (receiveMessagesCheckButton.isSelected()) {
             receiveMessagesCheckButton.click();
         }
-         agreementsCheckButton.click();
+        agreementsCheckButton.click();
 
 
     }
 
     public void fillLegalRegistrationForm() {
+        email.sendKeys("abv3@abv.bg");
+        password.sendKeys("parola123");
 
-        legalPerson.click();
-        email.sendKeys("abv@abv.bg");
-
+        if (!legalPerson.isSelected()) {
+            legalPerson.click();
+        }
+        nameOrganization.sendKeys("TEst ood");
+        eik.sendKeys("12435552");
+        nameORG.sendKeys("Test Ivanov1");
+        address.sendKeys("Banishora blok 100 et 1");
+        phone.sendKeys("0889898989");
+        if (receiveMessagesCheckButton.isSelected()) {
+            receiveMessagesCheckButton.click();
+        }
+        agreementsCheckButton.click();
     }
-    public void isRegisterSuccess(){
-        Assert.assertEquals("Добре дошли, Test Ivanov1!",registerSuccess.getText());
+
+    public void isRegisterSuccess() {
+        Assert.assertEquals("Добре дошли, Test Ivanov1!", registerSuccess.getText());
     }
 
     public void register() {
