@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import utils.Utils;
 
 import static java.lang.Thread.sleep;
 
@@ -15,7 +16,7 @@ public class LoginToRCPage {
     private WebDriver driver = null;
     private String URL = "https://www.therecordscorner.com/login";
 
-    private void LoginToRCPageDriver(String username, String password, Config.Browsers browser) {
+    private void LoginToRCPageDriver(String username, String password, Utils.Browsers browser) {
         switch (browser) {
             case Chrome:
                 System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
@@ -44,7 +45,7 @@ public class LoginToRCPage {
 
     @Test
     public void successLogin() throws InterruptedException {
-        LoginToRCPageDriver(Config.USERNAME, Config.PASSWORD, Config.Browsers.Chrome);
+        LoginToRCPageDriver(Utils.USERNAME, Utils.PASSWORD, Utils.Browsers.Chrome);
 
         //verify login
         sleep(1000);

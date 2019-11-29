@@ -1,3 +1,5 @@
+package tests;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import utils.Utils;
 
 import static java.lang.Thread.sleep;
 
@@ -14,7 +17,7 @@ public class LoginFormTests {
     private String loginURL = "http://the-internet.herokuapp.com/login";
 
 
-    private void initLoginAndDriver(String username, String password, Config.Browsers browser) {
+    private void initLoginAndDriver(String username, String password, Utils.Browsers browser) {
 
         switch (browser) {
             case Chrome:
@@ -45,7 +48,7 @@ public class LoginFormTests {
 
     @Test
     public void successLogin() throws InterruptedException {
-        initLoginAndDriver(Config.USERNAME, Config.PASSWORD, Config.Browsers.Chrome);
+        initLoginAndDriver(Utils.USERNAME, Utils.PASSWORD, Utils.Browsers.Chrome);
 
         //verify login
         sleep(1000);
@@ -58,7 +61,7 @@ public class LoginFormTests {
 
     @Test
     public void invalidLoginPassword() throws InterruptedException {
-        initLoginAndDriver(Config.USERNAME, "SuperSecretPassword!123", Config.Browsers.FireFox);
+        initLoginAndDriver(Utils.USERNAME, "SuperSecretPassword!123", Utils.Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
         Assert.assertTrue(
@@ -68,7 +71,7 @@ public class LoginFormTests {
 
     @Test
     public void invalidLoginUsername() throws InterruptedException {
-        initLoginAndDriver("tomsmith123", Config.PASSWORD, Config.Browsers.FireFox);
+        initLoginAndDriver("tomsmith123", Utils.PASSWORD, Utils.Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
         Assert.assertTrue(
@@ -78,7 +81,7 @@ public class LoginFormTests {
 
     @Test
     public void validationMessageEmail() throws InterruptedException {
-        initLoginAndDriver("", "", Config.Browsers.FireFox);
+        initLoginAndDriver("", "", Utils.Browsers.FireFox);
         sleep(1000);
         WebElement loginFailMessage = driver.findElement(By.id("flash"));
         Assert.assertTrue(
@@ -87,7 +90,7 @@ public class LoginFormTests {
 
     @Test
     public void validationLogoutMessage() throws InterruptedException {
-        initLoginAndDriver(Config.USERNAME, Config.PASSWORD, Config.Browsers.FireFox);
+        initLoginAndDriver(Utils.USERNAME, Utils.PASSWORD, Utils.Browsers.FireFox);
         sleep(1000);
         WebElement logout = driver.findElement(By.xpath("//*[@id=\"content\"]/div/a"));
         logout.click();

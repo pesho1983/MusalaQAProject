@@ -1,12 +1,16 @@
+package utils;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pages.RegistrationPage;
 
-public class Config {
+import java.util.concurrent.TimeUnit;
+
+public class Utils {
 
     public final static String USERNAME = "tomsmith";
     public final static String PASSWORD = "SuperSecretPassword!";
+    public final static String BASE_URL = "https://www.therecordscorner.com";
 
     public enum Browsers {
         Chrome,
@@ -39,4 +43,6 @@ public class Config {
         driver.manage().window().maximize();  //fullscreen
         return driver;
     }
+
+
 }
