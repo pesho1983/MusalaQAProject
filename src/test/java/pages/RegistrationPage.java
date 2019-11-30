@@ -29,7 +29,7 @@ public class RegistrationPage {
 
     @FindBy(id = "profile_billing_country")
     private WebElement Select;
-    Select dropdown = new Select(Select);
+    Select dropdown;
 
     @FindBy(id = "profile_billing_address")
     private WebElement address;
@@ -67,6 +67,7 @@ public class RegistrationPage {
 
     }
 
+
     public void fillIndividualRegistrationForm() {
         String random = getSaltString() + "@abv.bg";
         email.sendKeys(random);
@@ -76,6 +77,7 @@ public class RegistrationPage {
         }
 
         name.sendKeys("Test Ivanov1");
+        dropdown = new Select(Select);
         dropdown.selectByValue("25");
         address.sendKeys("Banishora blok 100 et 1");
         phone.sendKeys("0889898989");
