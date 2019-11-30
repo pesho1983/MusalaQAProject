@@ -15,7 +15,7 @@ public class RegistrationPage {
 
     private WebDriver driver = null;
     //Page URL
-    private static final String PAGE_URL = BASE_URL + "/ragistracia";
+    private static final String REGISTRATION_URL = BASE_URL + "/ragistracia";
     //credentials
     @FindBy(id = "profile_email")
     private WebElement email;
@@ -26,10 +26,12 @@ public class RegistrationPage {
     private WebElement individualPerson;
     @FindBy(id = "profile_billing_person_name")
     private WebElement name;
+    @FindBy(id = "profile_billing_city")
+    private WebElement city;
 
     @FindBy(id = "profile_billing_country")
     private WebElement Select;
-    Select dropdown;
+    private Select dropdown;
 
     @FindBy(id = "profile_billing_address")
     private WebElement address;
@@ -62,7 +64,7 @@ public class RegistrationPage {
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
-        driver.get(PAGE_URL);
+        driver.get(REGISTRATION_URL);
         PageFactory.initElements(driver, this);
 
     }
@@ -78,7 +80,7 @@ public class RegistrationPage {
 
         name.sendKeys("Test Ivanov1");
         dropdown = new Select(Select);
-        dropdown.selectByValue("25");
+        dropdown.selectByVisibleText("25");
         address.sendKeys("Banishora blok 100 et 1");
         phone.sendKeys("0889898989");
         if (receiveMessagesCheckButton.isSelected()) {
