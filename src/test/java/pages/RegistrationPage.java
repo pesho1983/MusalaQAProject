@@ -101,7 +101,7 @@ public class RegistrationPage {
         }
         nameOrganization.sendKeys("TEst ood");
         eik.sendKeys("12435552");
-        nameORG.sendKeys("Test Ivanov1");
+        nameORG.sendKeys("Test Ivanov");
         address.sendKeys("Banishora blok 100 et 1");
         phone.sendKeys("0889898989");
         if (receiveMessagesCheckButton.isSelected()) {
@@ -111,7 +111,7 @@ public class RegistrationPage {
     }
 
     public void isRegisterSuccess() {
-        Assert.assertEquals("Добре дошли, Test Ivanov1!", registerSuccess.getText());
+        Assert.assertEquals("Добре дошли, Test Ivanov!", registerSuccess.getText());
     }
 
     public void register() {
