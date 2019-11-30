@@ -11,7 +11,7 @@ public class LoginPage {
     private static final String PAGE_URL = BASE_URL + "/login";
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;this.driver = driver;
+        this.driver = driver;
         driver.get(PAGE_URL);
         PageFactory.initElements(driver, this);
     }

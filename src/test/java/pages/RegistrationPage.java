@@ -5,8 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import static utils.Utils.BASE_URL;
+import static utils.Utils.getSaltString;
 
 
 public class RegistrationPage {
@@ -24,6 +26,11 @@ public class RegistrationPage {
     private WebElement individualPerson;
     @FindBy(id = "profile_billing_person_name")
     private WebElement name;
+
+    @FindBy(id = "profile_billing_country")
+    private WebElement Select;
+    Select dropdown = new Select(Select);
+
     @FindBy(id = "profile_billing_address")
     private WebElement address;
     @FindBy(id = "profile_billing_phone")
@@ -61,14 +68,15 @@ public class RegistrationPage {
     }
 
     public void fillIndividualRegistrationForm() {
-
-        email.sendKeys("abv1@abv.bg");
+        String random = getSaltString() + "@abv.bg";
+        email.sendKeys(random);
         password.sendKeys("parola123");
         if (!individualPerson.isSelected()) {
             individualPerson.click();
         }
 
         name.sendKeys("Test Ivanov1");
+        dropdown.selectByValue("25");
         address.sendKeys("Banishora blok 100 et 1");
         phone.sendKeys("0889898989");
         if (receiveMessagesCheckButton.isSelected()) {
@@ -80,7 +88,8 @@ public class RegistrationPage {
     }
 
     public void fillLegalRegistrationForm() {
-        email.sendKeys("abv3@abv.bg");
+        String random = getSaltString() + "@abv.bg";
+        email.sendKeys(random);
         password.sendKeys("parola123");
 
         if (!legalPerson.isSelected()) {
