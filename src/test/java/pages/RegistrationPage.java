@@ -21,6 +21,7 @@ public class RegistrationPage {
     private WebElement email;
     @FindBy(id = "profile_password")
     private WebElement password;
+
     //IndividualPerson
     @FindBy(id = "profile_billing_type_individual")
     private WebElement individualPerson;
@@ -56,7 +57,7 @@ public class RegistrationPage {
     private WebElement receiveMessagesCheckButton;
 
     //Final
-    @FindBy(xpath = "//*[@id=\"user_account_fields\"]/div[10]/button")
+    @FindBy(xpath = "//*[@id='user_account_fields']/div[10]/button")
     private WebElement registerButton;
 
     @FindBy(xpath = "//*[@id=\"page_content\"]/h1")
